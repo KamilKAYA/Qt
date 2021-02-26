@@ -15,21 +15,19 @@ unsigned int ArduinoSerial::getPortNames(){
         //qDebug()<<this->availablePortNames.name[portcounter-1];
         portcounter++;
     }
-    qDebug()<<this->availablePortNames.size;
+    //qDebug()<<this->availablePortNames.size;
     return 1;
 }
 
 bool ArduinoSerial::connect(){
-    this->Port.setPortName(this->portname);
     this->Port.setBaudRate(QSerialPort::Baud9600);
     this->Port.setDataBits(QSerialPort::Data8);
     this->Port.setFlowControl(QSerialPort::NoFlowControl);
     this->Port.open(QSerialPort::ReadWrite);
-
     return true;
 }
 bool ArduinoSerial::disconnect(){
-
+    this->Port.close();
     return true;
 }
 
@@ -40,6 +38,7 @@ packet  ArduinoSerial::read(){
     return test;
 }
 bool    ArduinoSerial::write(){
+    this->Port.write("kamil");
     return true;
 }
 

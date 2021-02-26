@@ -21,8 +21,7 @@ class ArduinoSerial : public QObject
 private:
 
 public:
-    availablePorts  availablePortNames;
-    QString portname;
+    availablePorts  availablePortNames; // bu tamamlandı.
     ArduinoSerial();
     unsigned int getPortNames();
     bool connect();

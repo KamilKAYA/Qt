@@ -13,7 +13,57 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="listPorts">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>20</y>
+      <width>211</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Portları Tazele</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="ports">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>90</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="connectToArduino">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>90</y>
+      <width>211</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bağlan</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="send">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>200</y>
+      <width>261</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Arduinoya Selam Ver</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
