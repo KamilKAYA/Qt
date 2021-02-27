@@ -53,14 +53,62 @@
    <widget class="QPushButton" name="send">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>200</y>
+      <x>310</x>
+      <y>220</y>
       <width>261</width>
       <height>36</height>
      </rect>
     </property>
     <property name="text">
      <string>Arduinoya Selam Ver</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="disconnectFromArduino">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>130</y>
+      <width>211</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bağlantıyı Kes</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="read">
+    <property name="geometry">
+     <rect>
+      <x>27</x>
+      <y>220</y>
+      <width>261</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ardunadan Geleni Oku</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="incomingData">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>271</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>.AppleSystemUIFont</family>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>veri yok</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
@@ -70,7 +118,7 @@
      <x>0</x>
      <y>0</y>
      <width>596</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -4,11 +4,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QObject>
-
-struct packet{
-    uint8_t header;
-    uint16_t    message;
-};
+#include <QString>
 
 struct availablePorts{
     QString name[50];
@@ -19,17 +15,19 @@ class ArduinoSerial : public QObject
 {
     Q_OBJECT
 private:
-
+    uint8_t packetSize;
+    uint8_t startSignature[3];
+    uint16_t incomingDataUint16_t;
 public:
     availablePorts  availablePortNames; // bu tamamlandı.
     ArduinoSerial();
     unsigned int getPortNames();
-    bool connect();
-    bool disconnect();
+    bool begin(QString portname);
+    bool dead();
     QSerialPort Port;
-    packet  read();
-    bool    write();
-public slots:
+    uint16_t  read();
+    bool    write(uint16_t data);
+private slots:
     void readData();
 };
 

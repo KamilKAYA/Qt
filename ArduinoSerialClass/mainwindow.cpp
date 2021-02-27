@@ -5,7 +5,6 @@
 
 ArduinoSerial mySerialPort;
 
-void getPortNames();
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     mySerialPort.getPortNames();
+    ui->ports->clear();
+    for(unsigned int i=0; i<mySerialPort.availablePortNames.size; i++)ui->ports->addItem(mySerialPort.availablePortNames.name[i]);
 
 }
 
@@ -35,8 +36,12 @@ void MainWindow::on_connectToArduino_clicked()
 {
     QString selectedPortName=ui->ports->itemText(ui->ports->currentIndex());
 
-    mySerialPort.Port.setPortName(selectedPortName);
-    mySerialPort.connect();
+    if(mySerialPort.begin(selectedPortName)){
+        ui->disconnectFromArduino->setEnabled(true);
+        ui->connectToArduino->setEnabled(false);
+        ui->ports->setEnabled(false);
+        //connect(&mySerialPort.Port, SIGNAL(readyRead()), this, SLOT(mySerialPort.readData()));
+    }
 }
 
 void MainWindow::on_ports_activated(const QString &arg1)
@@ -46,5 +51,19 @@ void MainWindow::on_ports_activated(const QString &arg1)
 
 void MainWindow::on_send_clicked()
 {
-    mySerialPort.write();
+    mySerialPort.write(1453);
+}
+
+void MainWindow::on_disconnectFromArduino_clicked()
+{
+    if(mySerialPort.dead()){
+        ui->disconnectFromArduino->setEnabled(false);
+        ui->connectToArduino->setEnabled(true);
+        ui->ports->setEnabled(true);
+    }
+}
+
+void MainWindow::on_read_clicked()
+{
+    ui->incomingData->setText(QString::number(mySerialPort.read()));
 }

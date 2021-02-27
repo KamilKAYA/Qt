@@ -25,6 +25,10 @@ private slots:
 
     void on_send_clicked();
 
+    void on_disconnectFromArduino_clicked();
+
+    void on_read_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
