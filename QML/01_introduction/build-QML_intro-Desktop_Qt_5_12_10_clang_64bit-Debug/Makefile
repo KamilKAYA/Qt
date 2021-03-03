@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.12 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.12 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../QML_intro -I. -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/macx-clang -F/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib
+INCPATH       = -I../QML_intro -I. -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQuick.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQml.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtNetwork.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/macx-clang -F/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib
 QMAKE         = /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = QML_intro1.0.0
 DISTDIR = /Users/kamilkaya/Documents/GitHub/Qt/QML/01_introduction/build-QML_intro-Desktop_Qt_5_12_10_clang_64bit-Debug/.tmp/QML_intro1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.12 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
+LIBS          = $(SUBLIBS) -F/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib -framework QtQuick -framework QtGui -framework QtQml -framework QtNetwork -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -52,12 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../QML_intro/main.cpp \
-		../QML_intro/mainwindow.cpp moc_mainwindow.cpp
+SOURCES       = ../QML_intro/main.cpp qrc_main.cpp
 OBJECTS       = main.o \
-		mainwindow.o \
-		moc_mainwindow.o
-DIST          = /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/spec_pre.prf \
+		qrc_main.o
+DIST          = ../QML_intro/main.qml \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/qdevice.pri \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/device_config.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/common/unix.conf \
@@ -239,7 +238,6 @@ DIST          = /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/spe
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/resources.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/moc.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/opengl.prf \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/uic.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/thread.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/qmake_use.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/file_copies.prf \
@@ -249,8 +247,7 @@ DIST          = /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/spe
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/exceptions.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/yacc.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/lex.prf \
-		../QML_intro/QML_intro.pro ../QML_intro/mainwindow.h ../QML_intro/main.cpp \
-		../QML_intro/mainwindow.cpp
+		../QML_intro/QML_intro.pro  ../QML_intro/main.cpp
 QMAKE_TARGET  = QML_intro
 DESTDIR       = 
 TARGET        = QML_intro.app/Contents/MacOS/QML_intro
@@ -269,7 +266,7 @@ include /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-QML_intro.app/Contents/MacOS/QML_intro: ui_mainwindow.h $(OBJECTS)  
+QML_intro.app/Contents/MacOS/QML_intro:  $(OBJECTS)  
 	@test -d QML_intro.app/Contents/MacOS/ || mkdir -p QML_intro.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -455,7 +452,6 @@ Makefile: ../QML_intro/QML_intro.pro /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/resources.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/moc.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/opengl.prf \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/uic.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/thread.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/qmake_use.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/file_copies.prf \
@@ -466,8 +462,11 @@ Makefile: ../QML_intro/QML_intro.pro /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/yacc.prf \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/lex.prf \
 		../QML_intro/QML_intro.pro \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
+		../QML_intro/main.qrc \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQuick.framework/QtQuick.prl \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/QtGui.prl \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQml.framework/QtQml.prl \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
 		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtCore.framework/QtCore.prl
 	$(QMAKE) -o Makefile ../QML_intro/QML_intro.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/spec_pre.prf:
@@ -652,7 +651,6 @@ Makefile: ../QML_intro/QML_intro.pro /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/resources.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/moc.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/opengl.prf:
-/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/uic.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/unix/thread.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/qmake_use.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/file_copies.prf:
@@ -663,8 +661,11 @@ Makefile: ../QML_intro/QML_intro.pro /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/yacc.prf:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/lex.prf:
 ../QML_intro/QML_intro.pro:
-/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
+../QML_intro/main.qrc:
+/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQuick.framework/QtQuick.prl:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/QtGui.prl:
+/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtQml.framework/QtQml.prl:
+/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
 /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtCore.framework/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../QML_intro/QML_intro.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
@@ -695,10 +696,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../QML_intro/main.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QML_intro/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QML_intro/main.cpp ../QML_intro/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QML_intro/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../QML_intro/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -724,35 +724,26 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_main.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_main.cpp
+qrc_main.cpp: ../QML_intro/main.qrc \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/rcc \
+		../QML_intro/main.qml
+	/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/rcc -name main ../QML_intro/main.qrc -o qrc_main.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all:
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
-moc_mainwindow.cpp: ../QML_intro/mainwindow.h \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		moc_predefs.h \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/moc
-	/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/moc $(DEFINES) --include /Users/kamilkaya/Documents/GitHub/Qt/QML/01_introduction/build-QML_intro-Desktop_Qt_5_12_10_clang_64bit-Debug/moc_predefs.h -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/mkspecs/macx-clang -I/Users/kamilkaya/Documents/GitHub/Qt/QML/01_introduction/QML_intro -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/Headers -I/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib ../QML_intro/mainwindow.h -o moc_mainwindow.cpp
-
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
-compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../QML_intro/mainwindow.ui \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/uic
-	/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/bin/uic ../QML_intro/mainwindow.ui -o ui_mainwindow.h
-
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -761,25 +752,16 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
 
 ####### Compile
 
-main.o: ../QML_intro/main.cpp ../QML_intro/mainwindow.h \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+main.o: ../QML_intro/main.cpp /Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtGui.framework/Headers/qguiapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QML_intro/main.cpp
 
-mainwindow.o: ../QML_intro/mainwindow.cpp ../QML_intro/mainwindow.h \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/kamilkaya/Qt5.12.10/5.12.10/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../QML_intro/mainwindow.cpp
-
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+qrc_main.o: qrc_main.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_main.o qrc_main.cpp
 
 ####### Install
 
