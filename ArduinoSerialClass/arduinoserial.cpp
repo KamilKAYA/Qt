@@ -58,6 +58,7 @@ uint16_t  ArduinoSerial::read(){
     qDebug()<<this->incomingDataUint16_t;
     return this->incomingDataUint16_t;
 }
+
 bool    ArduinoSerial::write(uint16_t data){
     uint8_t sendData[2];
     sendData[0]=data&0x00FF;
