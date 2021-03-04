@@ -19,6 +19,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    Circle.qml \
+    CircleForm.ui.qml \
     main.qml
 
 RESOURCES += \
