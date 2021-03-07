@@ -1,4 +1,4 @@
-QT       += quick core
+QT       += qml quick core
 
 CONFIG += c++11
 
@@ -9,7 +9,8 @@ CONFIG += c++11
 SOURCES += \
     main.cpp
 
-HEADERS +=
+HEADERS += \
+    main.h
 
 FORMS +=
 
@@ -18,10 +19,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    Circle.qml \
-    CircleForm.ui.qml \
-    main.qml
+DISTFILES +=
 
 RESOURCES += \
     main.qrc
