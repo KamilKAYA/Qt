@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QtCore>
+#include <QtGui>
+#include <QGraphicsScene>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +23,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scane;
+    QGraphicsLineItem   *blackLine;
+    QGraphicsLineItem   *redLine;
+    QGraphicsLineItem   *blueLine;
+    QGraphicsLineItem   *yellowLine;
+    QGraphicsLineItem   *greenLine;
+
+
 public slots:
     void refreshFunction();
 };

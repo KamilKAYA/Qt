@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -59,6 +60,8 @@ public:
     QFrame *item_title_frame;
     QLabel *item_title_label;
     QLabel *item_title_label_2;
+    QFrame *graphics;
+    QGraphicsView *graphicsView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -66,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1192, 732);
+        MainWindow->resize(1278, 732);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         temperatures = new QFrame(centralwidget);
@@ -283,10 +286,29 @@ public:
         item_title_label_2->setGeometry(QRect(60, 0, 121, 41));
         item_title_label_2->setFont(font);
         item_title_label_2->setAlignment(Qt::AlignCenter);
+        graphics = new QFrame(centralwidget);
+        graphics->setObjectName(QString::fromUtf8("graphics"));
+        graphics->setGeometry(QRect(230, 10, 1041, 681));
+        graphics->setFrameShape(QFrame::StyledPanel);
+        graphics->setFrameShadow(QFrame::Raised);
+        graphicsView = new QGraphicsView(graphics);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setGeometry(QRect(30, 30, 1000, 600));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(graphicsView->sizePolicy().hasHeightForWidth());
+        graphicsView->setSizePolicy(sizePolicy);
+        graphicsView->setMinimumSize(QSize(1000, 600));
+        graphicsView->setMaximumSize(QSize(1000, 600));
+        graphicsView->setAcceptDrops(true);
+        graphicsView->setFrameShape(QFrame::StyledPanel);
+        graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1192, 21));
+        menubar->setGeometry(QRect(0, 0, 1278, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
