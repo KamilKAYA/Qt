@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/qml"/>
+    <qresource prefix="/">
+        <file>AnalogKadran.qml</file>
+        <file>AnalogKadranForm.ui.qml</file>
+    </qresource>
+</RCC>
