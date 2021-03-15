@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.10
+** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -17,6 +17,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -62,6 +63,8 @@ public:
     QLabel *item_title_label_2;
     QFrame *graphics;
     QGraphicsView *graphicsView;
+    QSlider *scaleBar;
+    QLabel *timeScaleLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -306,10 +309,22 @@ public:
         graphicsView->setFrameShape(QFrame::StyledPanel);
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scaleBar = new QSlider(graphics);
+        scaleBar->setObjectName(QString::fromUtf8("scaleBar"));
+        scaleBar->setGeometry(QRect(30, 640, 160, 22));
+        scaleBar->setMinimum(100);
+        scaleBar->setMaximum(5000);
+        scaleBar->setSingleStep(100);
+        scaleBar->setPageStep(500);
+        scaleBar->setOrientation(Qt::Horizontal);
+        scaleBar->setTickInterval(100);
+        timeScaleLabel = new QLabel(graphics);
+        timeScaleLabel->setObjectName(QString::fromUtf8("timeScaleLabel"));
+        timeScaleLabel->setGeometry(QRect(210, 640, 361, 20));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1278, 21));
+        menubar->setGeometry(QRect(0, 0, 1278, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -322,19 +337,20 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        item_label_1->setText(QApplication::translate("MainWindow", "1", nullptr));
-        item_label_2->setText(QApplication::translate("MainWindow", "2", nullptr));
-        item_label_3->setText(QApplication::translate("MainWindow", "3", nullptr));
-        item_label_4->setText(QApplication::translate("MainWindow", "4", nullptr));
-        item_label_5->setText(QApplication::translate("MainWindow", "5", nullptr));
-        item_label_6->setText(QApplication::translate("MainWindow", "6", nullptr));
-        item_label_7->setText(QApplication::translate("MainWindow", "7", nullptr));
-        item_label_8->setText(QApplication::translate("MainWindow", "8", nullptr));
-        item_label_9->setText(QApplication::translate("MainWindow", "9", nullptr));
-        item_label_11->setText(QApplication::translate("MainWindow", "10", nullptr));
-        item_title_label->setText(QApplication::translate("MainWindow", "Ch", nullptr));
-        item_title_label_2->setText(QApplication::translate("MainWindow", "Value", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        item_label_1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        item_label_2->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        item_label_3->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        item_label_4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+        item_label_5->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
+        item_label_6->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        item_label_7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        item_label_8->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
+        item_label_9->setText(QCoreApplication::translate("MainWindow", "9", nullptr));
+        item_label_11->setText(QCoreApplication::translate("MainWindow", "10", nullptr));
+        item_title_label->setText(QCoreApplication::translate("MainWindow", "Ch", nullptr));
+        item_title_label_2->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        timeScaleLabel->setText(QCoreApplication::translate("MainWindow", "\303\226rnekleme aral\304\261\304\237\304\261: 100 ms", nullptr));
     } // retranslateUi
 
 };

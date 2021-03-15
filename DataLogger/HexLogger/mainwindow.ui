@@ -820,6 +820,47 @@
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
+    <widget class="QSlider" name="scaleBar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>640</y>
+       <width>160</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>100</number>
+     </property>
+     <property name="maximum">
+      <number>5000</number>
+     </property>
+     <property name="singleStep">
+      <number>100</number>
+     </property>
+     <property name="pageStep">
+      <number>500</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickInterval">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="timeScaleLabel">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>640</y>
+       <width>361</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Örnekleme aralığı: 100 ms</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -828,7 +869,7 @@
      <x>0</x>
      <y>0</y>
      <width>1278</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -6,6 +6,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QGraphicsScene>
+#include <QGraphicsTextItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,12 +19,24 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void drawGrid();
+    void drawLine();
 
     QTimer *refresh = new QTimer(this);
 
 private:
+    uint8_t linePenWidth;
+    uint8_t gridPenWidth;
+    uint8_t gridSize;
+    uint16_t timeStep;
+    uint8_t tempStep;
+    uint16_t refreshTime;
+    uint16_t heightOfGraph;
+    uint16_t widthOfGraph;
     Ui::MainWindow *ui;
     QGraphicsScene *scane;
+    QGraphicsTextItem   *timeText;
+    QGraphicsTextItem   *tempText;
     QGraphicsLineItem   *blackLine;
     QGraphicsLineItem   *redLine;
     QGraphicsLineItem   *blueLine;
@@ -33,5 +46,7 @@ private:
 
 public slots:
     void refreshFunction();
+private slots:
+    void on_scaleBar_valueChanged(int value);
 };
 #endif // MAINWINDOW_H
