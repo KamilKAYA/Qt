@@ -1,0 +1,5 @@
+Arkadaşlar merhaba,
+
+Normal olarak Arduino üzerinde proje geliştirmesemde bu proje için kullanılacak mantığı vermesi açısından bir örnek bırakıyorum, ben orjinalinde artix 7 ile bir
+sayısal devre dizayn ettim ki örnekleme zamanları çok yakın olsun diye lakin tavsiyem bu arduino dosyasından sadece veri gönderme zamanlarını almanız aksi halde 
+örnekleme zamanlarında adc veya spi örnekleme zamanı kadar fark oluşacaktır.
