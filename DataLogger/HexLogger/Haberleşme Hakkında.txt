@@ -2,8 +2,9 @@ Donanım ile haberleşme;
 
 ->	| Başlangıç işareti | kanal sayısı | zaman | data büyüklüğü | data |
 
-	*Başlangıç işareti donanımın kendini tanıttığı işarettir 2 byte olacaktır. Tanımlama verileri 0xFF, 0xFF dir.
+	*Başlangıç işareti donanımın kendini tanıttığı işarettir 3 byte olacaktır. Tanımlama verileri; 0xFF, 8'b00110101 ,0x7F dir.
 	*Kanal Sayısı donanımın sahip olduğu kanal sayısını belirtir. Tek byttır, en az 1 en fazla 10 olabilir.
 	*Zaman verinin ardışık gidiş zamanını bildirir 4 byte den oluşur, her bir değer 100ms yi temsil eder.
 	*Data büyüklüğü adc nin cözünürlüğünü belirlemek için oluşturulmuştur 1 byte dir, verilerin 1 veya 2 byte olarak geldiğini temsil eder.
 	*Veriler kanal sayısı ve data büyüklüğü parametrelerine bağlı olarak ardışık olarak tek byte veya 2 byte olarak MSB ve ardından LSB olarak gelmektedir.
+	
