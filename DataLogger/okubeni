@@ -1,0 +1,9 @@
+Merhaba arkadaşlar,
+
+Bu projeyi geliştirmemdeki amaç piyasada 4k-5k veya üzeri fiyatlarda satılan data loggerlara boşa para vermeyip kendi çözümünüzü üretmeniz içindir.
+Haberleşme bilgileri dosyaların içersinde verilmiştir. Tavsiyem bir adet fpga deneme bordu alarak, max31855 cipi ile bir devre kurmanız ve bu devre 
+verilerini çok rahat bu projeye gönderebilirsiniz. Ayrıca max31855 için verilog okuma devresi "verilog" kodlarımın içerisinde bulabilirsinz.
+
+detaylı bilgi için kamil(at)kamilkaya.com.tr adresine mail atabilirsiniz.
+
+Hadi Allah kolaylık versin.
