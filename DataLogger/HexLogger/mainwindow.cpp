@@ -4,13 +4,21 @@
 
 using namespace std;
 
-double  temperatures[10]={-10,-20,-18,-30,-40,-10,-20,-18,-30,-40};
+double kalibrasyonKatsayisi=1.0;
 
-QPen    redPen(Qt::red);
-QPen    bluePen(Qt::blue);
-QPen    blackPen(Qt::black);
-QPen    greenPen(Qt::green);
-QPen    yellowPen(Qt::yellow);
+QPen   gridPen(QColor(200, 200, 200));
+QPen   myPens[10]={ QColor(255, 126, 121),
+                    QColor(255, 147, 0),
+                    QColor(148, 17, 0),
+                    QColor(255, 251, 0),
+                    QColor(0, 249, 0),
+                    QColor(0, 143, 0),
+                    QColor(115, 253, 255),
+                    QColor(4, 51, 255),
+                    QColor(255, 133, 255),
+                    QColor(148, 23, 81)};
+
+ArduinoSerial FPGA_Serial;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,13 +27,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->heightOfGraph=600;
-    this->widthOfGraph=1000;
+    this->widthOfGraph=1020;
     this->gridPenWidth=1;
     this->linePenWidth=2;
     this->refreshTime=100;  //milisecond
-    this->timeStep=1000;     // tarama hızı milisecond
+    this->timeStep=100;     // tarama hızı milisecond
     this->tempStep=20;
     this->gridSize=60;
+
 
     scane = new QGraphicsScene(this);
     ui->graphicsView->setScene(scane);
@@ -36,29 +45,25 @@ MainWindow::MainWindow(QWidget *parent)
     drawGrid();
 
     connect(refresh, SIGNAL(timeout()), this, SLOT(refreshFunction()));
-    refresh->start(this->refreshTime);
+
+
+    connect(getPortTimer, SIGNAL(timeout()), this, SLOT(automaticPortConnection()));
+    getPortTimer->start(1000);
 
 }
 
 double old_temperatures[10]={300};
 
-void MainWindow::drawLine(){
+void MainWindow::drawLine(uint32_t timex, double  temperatures[10]){
     static int time=-(this->widthOfGraph/2);
     static int old_time=-(this->widthOfGraph/2);
 
-    redPen.setWidth(this->linePenWidth);
-    bluePen.setWidth(this->linePenWidth);
-    blackPen.setWidth(this->linePenWidth);
-    greenPen.setWidth(this->linePenWidth);
-    yellowPen.setWidth(this->linePenWidth);
+    for(int i=0; i<10; i++)myPens[i].setWidth(this->linePenWidth);
+
 
     time+=(this->gridSize)*100/this->timeStep;
 
-    redLine = scane->addLine(old_time,-3*old_temperatures[0],time,-3*temperatures[0],redPen);
-    blueLine = scane->addLine(old_time,-3*old_temperatures[1],time,-3*temperatures[1],bluePen);
-    blackLine = scane->addLine(old_time,-3*old_temperatures[2],time,-3*temperatures[2],blackPen);
-    greenLine = scane->addLine(old_time,-3*old_temperatures[3],time,-3*temperatures[3],greenPen);
-    yellowLine = scane->addLine(old_time,-3*old_temperatures[4],time,-3*temperatures[4],yellowPen);
+    for(int i=0; i<10; i++)graphLine[i] = scane->addLine(old_time,-3*old_temperatures[i],time,-3*temperatures[i],myPens[i]);
 
     old_time=time;
 
@@ -77,7 +82,7 @@ void MainWindow::drawLine(){
 }
 
 void MainWindow::drawGrid(){
-    blackPen.setWidth(this->gridPenWidth);
+    gridPen.setWidth(this->gridPenWidth);
     int x_min=-(this->widthOfGraph/2);
     int x_max=(this->widthOfGraph/2);
     int y_min=-(this->heightOfGraph/2);
@@ -86,7 +91,7 @@ void MainWindow::drawGrid(){
     int temperatureLabel=(this->heightOfGraph/this->gridSize)*(this->tempStep/2);
 
     for(int i=y_min; i<y_max; i=i+this->gridSize){
-        blackLine = scane->addLine(x_min,i,x_max,i);
+        gridLine = scane->addLine(x_min,i,x_max,i);
         tempText = scane->addText(QString::number(temperatureLabel)+" °C");
         temperatureLabel-=this->tempStep;
         tempText->setPos(x_min,i);
@@ -106,7 +111,7 @@ void MainWindow::drawGrid(){
             value=QString::number(progressTime)+" ms";
         }
 
-        blackLine = scane->addLine(i,y_min,i,y_max);
+        gridLine = scane->addLine(i,y_min,i,y_max);
         tempText = scane->addText(value);
         progressTime+=this->timeStep;
 
@@ -123,24 +128,64 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::refreshFunction(){
+    HexLoggerData myData=FPGA_Serial.read();
+    double temps[10]={0.0};
+    for(int i=0; i<myData.activeChannel; i++)temps[i]=myData.tempSensor[i]*kalibrasyonKatsayisi;
+    ui->item_display_1->display(temps[0]);
+    ui->item_display_2->display(temps[1]);
+    ui->item_display_3->display(temps[2]);
+    ui->item_display_4->display(temps[3]);
+    ui->item_display_5->display(temps[4]);
+    ui->item_display_6->display(temps[5]);
+    ui->item_display_7->display(temps[6]);
+    ui->item_display_8->display(temps[7]);
+    ui->item_display_9->display(temps[8]);
+    ui->item_display_11->display(temps[9]);
 
-    for(int i=0; i<10; i++){
-        temperatures[i]=temperatures[i]+0.1;
+    drawLine(myData.time, temps);
+    ui->reelTimeTrig->setText("Zaman:"+(QString::number(myData.time*100))+" ms");
+    //qDebug()<<myData.time;
+
+}
+
+void MainWindow::automaticPortConnection(){
+    static uint8_t portItem, old_portItem=0;
+    static QString oldPortName="";
+
+
+    if(FPGA_Serial.read().available){
+        getPortTimer->stop();
+        refresh->start(this->refreshTime);
+        ui->connectionStatusLabel->setText("Bağlantı Durumu: Bağlandı.");
+        ui->progressBar->setValue(FPGA_Serial.availablePortNames.size);
+    }else{
+
+        if(oldPortName.size()>0)FPGA_Serial.dead();
+
+        ui->progressBar->setMaximum(FPGA_Serial.availablePortNames.size);
+        ui->progressBar->setValue(portItem);
+        portItem++;
+
+        if (portItem==FPGA_Serial.availablePortNames.size   ||  FPGA_Serial.availablePortNames.size==0){
+            portItem=0;
+            old_portItem=255;
+        }
+        if(portItem==0)FPGA_Serial.getPortNames();
+
+
+        //for(unsigned int i=0; i<FPGA_Serial.availablePortNames.size; i++)qDebug()<<(FPGA_Serial.availablePortNames.name[i]);
+        //qDebug()<<portItem;
+
+        if(old_portItem!=portItem   && FPGA_Serial.availablePortNames.size!=0){
+            FPGA_Serial.begin(FPGA_Serial.availablePortNames.name[portItem]);
+            oldPortName=FPGA_Serial.availablePortNames.name[portItem];
+        }
+
+        ui->connectionStatusLabel->setText("Bağlantı Durumu: Aranıyor.");
+        ui->connectionPortName->setText("Port: "+FPGA_Serial.availablePortNames.name[portItem]);
+
+        old_portItem=portItem;
     }
-
-    ui->item_display_1->display(temperatures[0]);
-    ui->item_display_2->display(temperatures[1]);
-    ui->item_display_3->display(temperatures[2]);
-    ui->item_display_4->display(temperatures[3]);
-    ui->item_display_5->display(temperatures[4]);
-    ui->item_display_6->display(temperatures[5]);
-    ui->item_display_7->display(temperatures[6]);
-    ui->item_display_8->display(temperatures[7]);
-    ui->item_display_9->display(temperatures[8]);
-    ui->item_display_11->display(temperatures[9]);
-
-    drawLine();
-
 }
 
 void MainWindow::on_scaleBar_valueChanged(int value)

@@ -7,6 +7,7 @@
 #include <QtGui>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include "arduinoserial.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,9 +21,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void drawGrid();
-    void drawLine();
+    void drawLine(uint32_t time, double  temperatures[10]);
 
     QTimer *refresh = new QTimer(this);
+    QTimer *getPortTimer = new QTimer(this);
 
 private:
     uint8_t linePenWidth;
@@ -37,15 +39,13 @@ private:
     QGraphicsScene *scane;
     QGraphicsTextItem   *timeText;
     QGraphicsTextItem   *tempText;
-    QGraphicsLineItem   *blackLine;
-    QGraphicsLineItem   *redLine;
-    QGraphicsLineItem   *blueLine;
-    QGraphicsLineItem   *yellowLine;
-    QGraphicsLineItem   *greenLine;
+    QGraphicsLineItem   *graphLine[10];
+    QGraphicsLineItem   *gridLine;
 
 
 public slots:
     void refreshFunction();
+    void automaticPortConnection();
 private slots:
     void on_scaleBar_valueChanged(int value);
 };

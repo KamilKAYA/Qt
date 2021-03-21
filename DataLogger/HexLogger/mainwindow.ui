@@ -6,12 +6,57 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1278</width>
-    <height>732</height>
+    <width>1280</width>
+    <height>711</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>710</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string extracomment="Bu proje Kamil KAYA tarafından Hextio adına Qt'de açık kaynaklı olarak yazılmıştır.">Hextio Data Logger</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel#item_label_1{
+	color: rgb(255, 126, 121);
+}
+QLabel#item_label_2{
+	color:rgb(255, 147, 0);
+}
+QLabel#item_label_3{
+	color: rgb(148, 17, 0);
+}
+QLabel#item_label_4{
+	color:rgb(255, 251, 0);
+}
+QLabel#item_label_5{
+	color: rgb(0, 249, 0);
+}
+QLabel#item_label_6{
+	color: rgb(0, 143, 0);
+}
+QLabel#item_label_7{
+	color: rgb(115, 253, 255);
+}
+QLabel#item_label_8{
+	color:rgb(4, 51, 255);
+}
+QLabel#item_label_9{
+	color:rgb(255, 133, 255);
+
+}
+QLabel#item_label_10{
+	color:rgb(148, 23, 81);
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="temperatures">
@@ -20,7 +65,7 @@
       <x>10</x>
       <y>10</y>
       <width>211</width>
-      <height>681</height>
+      <height>661</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -34,7 +79,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -104,7 +149,7 @@
       <rect>
        <x>10</x>
        <y>110</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -171,7 +216,7 @@
       <rect>
        <x>10</x>
        <y>170</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -238,7 +283,7 @@
       <rect>
        <x>10</x>
        <y>230</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -305,7 +350,7 @@
       <rect>
        <x>10</x>
        <y>290</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -372,7 +417,7 @@
       <rect>
        <x>10</x>
        <y>350</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -439,7 +484,7 @@
       <rect>
        <x>10</x>
        <y>410</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -506,7 +551,7 @@
       <rect>
        <x>10</x>
        <y>470</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -573,7 +618,7 @@
       <rect>
        <x>10</x>
        <y>530</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -640,7 +685,7 @@
       <rect>
        <x>10</x>
        <y>590</y>
-       <width>181</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -707,7 +752,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>181</width>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -734,7 +779,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Ch</string>
+       <string>Kanal</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -757,7 +802,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Value</string>
+       <string>Değer (°C)</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -770,9 +815,21 @@
      <rect>
       <x>230</x>
       <y>10</y>
-      <width>1041</width>
-      <height>681</height>
+      <width>1040</width>
+      <height>661</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1040</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1040</width>
+      <height>16777215</height>
+     </size>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -783,9 +840,9 @@
     <widget class="QGraphicsView" name="graphicsView">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>1000</width>
+       <x>10</x>
+       <y>10</y>
+       <width>1020</width>
        <height>600</height>
       </rect>
      </property>
@@ -797,13 +854,13 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>1000</width>
+       <width>1020</width>
        <height>600</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>1000</width>
+       <width>1020</width>
        <height>600</height>
       </size>
      </property>
@@ -823,8 +880,8 @@
     <widget class="QSlider" name="scaleBar">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>640</y>
+       <x>10</x>
+       <y>630</y>
        <width>160</width>
        <height>22</height>
       </rect>
@@ -851,8 +908,8 @@
     <widget class="QLabel" name="timeScaleLabel">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>640</y>
+       <x>190</x>
+       <y>630</y>
        <width>361</width>
        <height>20</height>
       </rect>
@@ -862,18 +919,75 @@
      </property>
     </widget>
    </widget>
+   <widget class="QFrame" name="statusBar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>680</y>
+      <width>1261</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="connectionStatusLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>261</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bağlantı Durumu:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="connectionPortName">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>0</y>
+       <width>331</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Port :</string>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="geometry">
+      <rect>
+       <x>1050</x>
+       <y>0</y>
+       <width>181</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>24</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="reelTimeTrig">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>0</y>
+       <width>321</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Zaman:</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1278</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
